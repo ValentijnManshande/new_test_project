@@ -1,6 +1,6 @@
 #index:
 #    path: /
-#    controller: App\Controller\ArticleController::index
+#    controller: App\Controller\ArticleController::homepage
 controllers:
-    resource: '../src/Controller/'
-    type: annotation
+  resource: '../src/Controller/'
+  type: annotation

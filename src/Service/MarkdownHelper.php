@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use Michelf\MarkdownInterface;
 use Psr\Log\LoggerInterface;
@@ -21,14 +19,14 @@ class MarkdownHelper
         $this->logger = $markdownLogger;
     }
 
-    public function parse(string $source) : string
+    public function parse(string $source): string
     {
-        if(stripos($source, 'bacon') !== false) {
+        if (stripos($source, 'bacon') !== false) {
             $this->logger->info('They are talking about bacon again!');
         }
 
         $item = $this->cache->getItem('markdown_'.md5($source));
-        if(!$item->isHit()){
+        if (!$item->isHit()) {
             $item->set($this->markdown->transform($source));
             $this->cache->save($item);
         }
