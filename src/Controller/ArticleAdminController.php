@@ -43,7 +43,7 @@ Prosciutto capicola mollit shankle aliquip do dolore hamburger brisket turducken
 Do mollit deserunt prosciutto laborum. Duis sint tongue quis nisi. Capicola qui beef ribs dolore pariatur.
 Minim strip steak fugiat nisi est, meatloaf pig aute. Swine rump turducken nulla sausage. Reprehenderit pork
 belly tongue alcatra, shoulder excepteur in beef bresaola duis ham bacon eiusmod. Doner drumstick short loin,
-adipisicing cow cillum tenderloin.0
+adipisicing cow cillum tenderloin.
 EOF);
 
         if(rand(1, 10) > 2){

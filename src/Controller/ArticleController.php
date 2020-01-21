@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
-use App\Service\MarkdownHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,26 +16,19 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage()
+    public function homepage(EntityManagerInterface $em)
     {
-        return $this->render('article/homepage.html.twig');
+        $repository = $em->getRepository(Article::class);
+        $articles = $repository->findAllPublishedOrderedByNewest();
+        return $this->render('article/homepage.html.twig', ['articles' => $articles]);
     }
 
     /**
      * @Route("/news/{slug}", name="article_show")
      */
 
-    public function show($slug, MarkdownHelper $markdownHelper, EntityManagerInterface $em)
+    public function show(Article $article)
     {
-        $repository = $em->getRepository(Article::class);
-        /**
-         * @var Article $article
-         */
-        $article = $repository->findOneBy(['slug' => $slug]);
-        if(!$article){
-            throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
-        }
-
         $comments = [
             'Whoop whoop whoop',
             'Something else yet',
@@ -45,9 +37,9 @@ class ArticleController extends AbstractController
 
 
         return $this->render('article/show.html.twig',[
-            'title' => ucwords(str_replace('-', ' ', $slug)),
+            'title' => ucwords(str_replace('-', ' ', $article->getSlug())),
             'article' => $article,
-            'slug' => $slug,
+            'slug' => $article->getSlug(),
             'comments' => $comments,
         ]);
     }
