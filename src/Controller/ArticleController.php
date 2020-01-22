@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,18 +30,11 @@ class ArticleController extends AbstractController
 
     public function show(Article $article)
     {
-        $comments = [
-            'Whoop whoop whoop',
-            'Something else yet',
-            'Yet something more'
-        ];
-
 
         return $this->render('article/show.html.twig',[
             'title' => ucwords(str_replace('-', ' ', $article->getSlug())),
             'article' => $article,
             'slug' => $article->getSlug(),
-            'comments' => $comments,
         ]);
     }
 
