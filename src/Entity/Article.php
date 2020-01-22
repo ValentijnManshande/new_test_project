@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
+use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -21,9 +23,6 @@ class Article
      */
     private $title;
 
-    /**
-     * @ORM\Column(type="string", length=100, unique=true)
-     */
     private $slug;
 
     /**
