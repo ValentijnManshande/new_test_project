@@ -7,7 +7,7 @@
 {% block content_body %}
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="text-center"> Manage Comments</h1>
+            <h1 class="text-center"> Manage Comments ({{ pagination.getTotalItemCount }})</h1>
 
             <form>
                 <div class="input-group mb-3">
@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
 
-                {% for comment in comments %}
+                {% for comment in pagination%}
                     <tr>
                         <td>
                             <a href="{{ path('article_show', {slug: comment.article.slug}) }}">
@@ -72,6 +72,7 @@
 
                 </tbody>
             </table>
+            {{ knp_pagination_render(pagination) }}
         </div>
     </div>
 {% endblock %}
