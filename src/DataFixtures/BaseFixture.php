@@ -71,7 +71,7 @@ abstract class BaseFixture extends Fixture
         }
 
         if (empty($this->referencesIndex[$groupName])) {
-            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"', $groupName));
+            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s" for "%s"', $groupName, get_class($this)));
         }
 
         $randomReferenceKey = $this->faker->randomElement($this->referencesIndex[$groupName]);

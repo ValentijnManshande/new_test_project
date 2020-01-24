@@ -17,8 +17,6 @@ class UserFixture extends BaseFixture
 
             return $user;
         });
-        // $product = new Product();
-        // $manager->persist($product);
 
         $manager->flush();
     }
