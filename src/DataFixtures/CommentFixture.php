@@ -11,7 +11,8 @@ class CommentFixture extends BaseFixture implements DependentFixtureInterface
 {
     protected function loadData(ObjectManager $manager)
     {
-        $this->createMany(Comment::class, 100, function(Comment $comment) {
+        $this->createMany(100, 'main_comments', function() {
+            $comment = new Comment();
             $comment->setContent(
                 $this->faker->boolean ? $this->faker->paragraph : $this->faker->sentences(2, true)
             );
@@ -20,6 +21,8 @@ class CommentFixture extends BaseFixture implements DependentFixtureInterface
 
             $comment->setArticle($this->getRandomReference(Article::class));
             $comment->setIsDeleted($this->faker->boolean(20));
+
+            return $comment;
         });
         $manager->flush();
     }
