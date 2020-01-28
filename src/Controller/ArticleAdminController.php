@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @IsGranted("ROLE_ADMIN")
  */
 
-class ArticleAdminController extends AbstractController
+class ArticleAdminController extends BaseController
 {
     /**
      * @Route("/admin/article/new", name="admin_article_new")
