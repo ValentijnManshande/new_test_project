@@ -1,4 +1,8 @@
 security:
+  encoders:
+    App\Entity\User:
+      algorithm: auto
+
   providers:
     # used to reload user from session & other features (e.g. switch_user)
     app_user_provider:
@@ -11,6 +15,16 @@ security:
       security: false
     main:
       anonymous: lazy
+
       guard:
           authenticators:
               - App\Security\LoginFormAuthenticator
+
+      logout:
+        path: app_logout
+
+      remember_me:
+        secret: '%kernel.secret%'
+        lifetime: 2592000
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
