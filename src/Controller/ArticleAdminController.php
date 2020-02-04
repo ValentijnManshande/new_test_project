@@ -26,18 +26,17 @@ class ArticleAdminController extends BaseController
 
        $form->handleRequest($request);
 
-       if($form->isSubmitted() && $form->isValid()){
-           $data = $form->getData();
-
-           $article = new Article();
-           $article->setTitle($data['title']);
-           $article->setContent($data['content']);
+       if($form->isSubmitted() && $form->isValid()) {
+           /** @var Article $article */
+           $article = $form->getData();
            $article->setAuthor($this->getUser());
 
            $em->persist($article);
            $em->flush();
 
-           return $this->redirectToRoute('app_homepage');
+           $this->addFlash('success', 'Article created. Knowledge is power!');
+
+           return $this->redirectToRoute('admin_article_list');
        }
 
        return $this->render('article_admin/new.html.twig',[
@@ -59,7 +58,7 @@ class ArticleAdminController extends BaseController
     }
 
     /**
-     * @Route{"/admin/article")
+     * @Route("/admin/article", name="admin_article_list")
      */
 
     public function list (ArticleRepository $articleRepo)
