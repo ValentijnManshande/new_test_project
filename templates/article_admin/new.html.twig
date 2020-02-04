@@ -1,0 +1,12 @@
+{% extends 'content_base.html.twig' %}
+
+{% block content_body %}
+    <h1> Launch a new Article! </h1>
+
+    {{ form_start(articleForm) }}
+        {{  form_widget(articleForm) }}
+
+        <button class="btn btn-primary" type="submit">Create!</button>
+    {{  form_end(articleForm) }}
+
+{% endblock %}
