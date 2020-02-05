@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -23,6 +25,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Get creative and think of a title")
      */
     private $title;
 
@@ -244,5 +247,17 @@ class Article
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if (strpos($this->getTitle(), 'the borg') !== false){
+            $context->buildViolation('Um.. the borg make us nervous')
+                ->atPath('title')
+                ->addViolation();
+        }
     }
 }

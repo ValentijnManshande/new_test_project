@@ -3,10 +3,8 @@
 {% block content_body %}
     <h1> Launch a new Article! </h1>
 
-    {{ form_start(articleForm) }}
-        {{  form_widget(articleForm) }}
-
-        <button class="btn btn-primary" type="submit">Create!</button>
-    {{  form_end(articleForm) }}
+    {{ include('article_admin/_form.html.twig', {
+        button_text: 'Create!'
+    }) }}
 
 {% endblock %}
